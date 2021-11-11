@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 const ContainerStyle = styled.main`
     display: block;
-    width: 1135px;
+    width: 85%;
     margin: 0 auto;
     position: relative;
 `;

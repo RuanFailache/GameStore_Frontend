@@ -61,7 +61,7 @@ const BannerTitleStyle = styled.h3`
 
 const BannerDescriptionStyle = styled.p`
     display: -webkit-box;
-    -webkit-line-clamp: 10;
+    -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

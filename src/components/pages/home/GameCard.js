@@ -1,22 +1,25 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function GameCard({ name, price, coverImg }){
+export default function GameCard({ id, name, price, coverImg }){
     return(
-        <CardStyle>
+        <CardStyle to={`/products/${id}`}>
             <img src={coverImg} alt="game-cover"/>
             <CardTextContainerStyle>
                 <GameTitleStyle>
                     {name}
                 </GameTitleStyle>
                 <GamePriceStyle>
-                    {price}
+                    R$ {price}
                 </GamePriceStyle>
             </CardTextContainerStyle>
         </CardStyle>
     );
 }
 
-const CardStyle = styled.div`
+const CardStyle = styled(Link)`
+    text-decoration: none;
+    
     width: 230px;
     height: 310px;
     background-color: white;
@@ -50,6 +53,7 @@ const CardTextContainerStyle = styled.div`
 
 const GameTitleStyle = styled.p`
     font-weight: 700;
+    color: black;
 `;
 
 const GamePriceStyle = styled.p`
