@@ -1,16 +1,26 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-export default function GameCard({ id, name, price, coverImg }){
+import { BsCartPlusFill } from "react-icons/bs"
+export default function GameCard({ id, name, price, coverImg, inventory }){
+    const outOfStock = inventory === 0;
     return(
         <CardStyle to={`/products/${id}`}>
+            {
+                outOfStock 
+                ? 
+                <OutOfStockStyle>
+                Produto fora de estoque :(
+                </OutOfStockStyle>
+                :
+                <div/>
+            }
             <img src={coverImg} alt="game-cover"/>
             <CardTextContainerStyle>
                 <GameTitleStyle>
                     {name}
                 </GameTitleStyle>
                 <GamePriceStyle>
-                    R$ {price}
+                     {outOfStock ? '---' : <span>R$ {price} <AddToCartIconStyle/></span>}
                 </GamePriceStyle>
             </CardTextContainerStyle>
         </CardStyle>
@@ -32,6 +42,7 @@ const CardStyle = styled(Link)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 
     img{
         width: 200px;
@@ -46,6 +57,25 @@ const CardStyle = styled(Link)`
  
 `;
 
+const OutOfStockStyle = styled.div`
+    width: 200px;
+    height: 240px;
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(110,110,110,1) 100%);
+    border-radius: 5px;
+    opacity: 0.7;
+    position: absolute;
+    top: 13px;
+    z-index: 1;
+
+    color: black;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 const CardTextContainerStyle = styled.div`
     width: 200px;
     margin-top: 8px;
@@ -54,10 +84,18 @@ const CardTextContainerStyle = styled.div`
 const GameTitleStyle = styled.p`
     font-weight: 700;
     color: black;
+    margin-bottom: 5px;
 `;
 
-const GamePriceStyle = styled.p`
+const GamePriceStyle = styled.div`
     color: #FF3300;
     font-weight: 700;
-    margin-top: 5px;
+`;
+
+const AddToCartIconStyle = styled(BsCartPlusFill)`
+    margin-left: 5px;
+
+    :hover{
+        filter: brightness(1.5);
+    }
 `;
