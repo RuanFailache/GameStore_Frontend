@@ -93,9 +93,9 @@ const GamePriceStyle = styled.div`
 `;
 
 const AddToCartIconStyle = styled(BsCartPlusFill)`
-    margin-left: 5px;
-
+    margin-left: 120px;
+    color: gray;
     :hover{
-        filter: brightness(1.5);
+        color: #FF3300;
     }
 `;
