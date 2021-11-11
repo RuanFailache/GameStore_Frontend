@@ -2,51 +2,51 @@ import styled from "styled-components";
 
 export const ContainerStyle = styled.main`
   display: block;
-  width: 935px;
+  width: 1135px;
   margin: 0 auto;
   position: relative;
-`;
 
-export const ContentStyle = styled.section`
-  position: absolute;
-  width: calc(70% - 135px);
-  top: 90px;
-  left: 0;
-  padding: 30px;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, .1);
-`
+  @media (max-width: 1135px) {
+    width: 100%;
+  }
+`;
 
 export const SideBarStyle = styled.aside`
   position: fixed;
-  width: calc(935px * 0.3);
+  width: calc(1135px * 0.3);
   top: 90px;
-  left: calc((100% - 935px) / 2 + 594.5px);
+  left: calc((100% - 1135px) / 2 + 1135px * 0.7);
   padding: 30px;
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+  box-sizing: border-box;
 
   & > p {
     display: block;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 12px;
+    line-height: 14px;
   }
 
   & > p > strong {
     font-weight: bold;
+  }
+
+  @media (max-width: 1135px) {
+    position: initial;
+    top: 200px;
+    left: 0;
   }
 `;
 
 export const PriceStyle = styled.strong`
   display: block;
   width: 100%;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 20px;
+  line-height: 24px;
   font-weight: bold;
-  margin-bottom: 15px;
-  padding-bottom: 7.5px;
+  margin-bottom: 7.5px;
+  padding-bottom: 3.25px;
   border-bottom: solid 1px rgba(0, 0, 0, .1);
   color: #f30;
 `;
@@ -54,8 +54,8 @@ export const PriceStyle = styled.strong`
 export const FilledButtonStyle = styled.button`
   display: block;
   width: 100%;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 14px;
+  line-height: 16px;
   font-weight: bold;
   margin-top: 15px;
   margin-bottom: 7.5px;
@@ -70,8 +70,8 @@ export const FilledButtonStyle = styled.button`
 export const OutlineButtonStyle = styled.button`
   display: block;
   width: 100%;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 14px;
+  line-height: 16px;
   font-weight: bold;
   padding: 15px;
   border: solid 2px #f30;
