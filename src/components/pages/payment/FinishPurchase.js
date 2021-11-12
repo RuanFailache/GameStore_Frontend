@@ -1,6 +1,12 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-export default function FinishPurchase(){
+export default function FinishPurchase({ isPaymentDataEmpty }){
+
+    function makePurchase(event){
+        event.preventDefault();
+    }
+
     return(
         <FinishPurchaseContainerStyle>
             <ContentContainerStyle>
@@ -8,18 +14,18 @@ export default function FinishPurchase(){
                     <span>Valor total da compra</span>
                     <span> R$ 899,97</span>
                 </PriceStyle>
-                <PaymentMethodsStyle>
+                <PaymentMethodsStyle onSubmit={makePurchase}>
                     <p>Formas de pagamento</p>
 
                     <FormGroupStyle>
-                        <InputStyle type="radio" name="payment-method" value="credit-card" id="credit-card"/>
+                        <InputStyle type="radio" name="payment-method" value="credit-card" id="credit-card" required/>
                         <label for="credit-card">Cartão de crédito</label><br/>
                     </FormGroupStyle>
                     <FormGroupStyle>
                         <InputStyle type="radio" name="payment-method" value="debit-card" id="debit-card"/>
                         <label for="debit-card">Cartão de débito</label><br/>
                     </FormGroupStyle>
-                    <ConfirmPurchaseButtonStyle type="submit">
+                    <ConfirmPurchaseButtonStyle type="submit" isPaymentDataEmpty={isPaymentDataEmpty} disabled={isPaymentDataEmpty}>
                         Efetuar compra
                     </ConfirmPurchaseButtonStyle>
                 </PaymentMethodsStyle>
@@ -112,10 +118,15 @@ const ConfirmPurchaseButtonStyle = styled.button`
     height: 35px;
     border-radius: 5px;
     border: none;
-    background-color: #FF3300;
+    background-color: ${(props) => props.isPaymentDataEmpty? '#CECECE' : '#FF3300'};
 
     color: white;
     font-family: 'Play', sans-serif;
     font-size: 18px;
+
+    :hover{
+        cursor: pointer;
+        filter: brightness(1.4);
+    }
 
 `; 
