@@ -17,7 +17,6 @@ export default function GameCard({ id, name, price, cover, stock }){
         if(!outOfStock){
             isInTheCart ? setIsInTheCart(false) : setIsInTheCart(true);
             isInTheCart? setProductsInCart(productsInCart.filter((prodId) => prodId !== id)) : setProductsInCart([...productsInCart, id]);
-            console.log(productsInCart);
         }
 
     }
