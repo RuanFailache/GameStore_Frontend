@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Play', sans-serif;
+    background-color: #E5E5E5;
+}
