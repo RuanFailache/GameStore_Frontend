@@ -94,11 +94,9 @@ export default function HomePage(){
             .then((res) => {
                 setGames(res.data);
                 setFeaturedGames([res.data[0], res.data[1], res.data[2]]);
-                console.log(res)
             })
             .catch((err) => {
                 alert('Erro ao acessar o servidor.');
-                console.log(err)
                 setGames([]);
                 setFeaturedGames([]);
             });
