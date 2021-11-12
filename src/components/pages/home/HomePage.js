@@ -1,63 +1,64 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { getProducts } from "../../../services/api";
 import { ContainerStyle } from "../../shared/sharedStyles";
 import Banner from "./Banner";
 import GameCard from "./GameCard";
-const games = [
+/* const games = [
     {   
         id: 1,
         name: 'League of Legends',
         price: '299',
-        coverImg: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
+        cover: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
         inventory: 3
     },
     {
         id: 2,
         name: 'League of Legends',
         price: '299',
-        coverImg: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
+        cover: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
         inventory: 0
     },
     {
         id: 3,
         name: 'League of Legends',
         price: '299',
-        coverImg: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
+        cover: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
         inventory: 3
     },
     {   
         id: 4,
         name: 'League of Legends',
         price: '299',
-        coverImg: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
+        cover: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
         inventory: 3
     },
     {   
         id: 5,
         name: 'League of Legends',
         price: '299',
-        coverImg: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
+        cover: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
         inventory: 3
     },
     {
         id: 6,
         name: 'League of Legends',
         price: '299',
-        coverImg: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
+        cover: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
         inventory: 3
     },
     {   
         id: 7,
         name: 'League of Legends',
         price: '299',
-        coverImg: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
+        cover: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
         inventory: 3
     },
     {   
         id: 8,
         name: 'League of Legends',
         price: '299',
-        coverImg: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
+        cover: 'https://e.snmc.io/lk/l/x/51f9c8d7985ba1a02328b4c74110dd36/5288877',
         inventory: 3
     }
 ];
@@ -67,7 +68,7 @@ const featuredGames = [
         id: 1,
         name: 'League of Legends - Enemy',
         price: '299',
-        coverImg: 'https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltd615715a4615fbb7/61799ab32378d322b0633c98/Arc_EnemyMV_Textless.jpg',
+        cover: 'https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltd615715a4615fbb7/61799ab32378d322b0633c98/Arc_EnemyMV_Textless.jpg',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         inventory: 3
     },
@@ -75,14 +76,38 @@ const featuredGames = [
         id: 2,
         name: 'League of Legends - Enemy',
         price: '299',
-        coverImg: 'https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltd615715a4615fbb7/61799ab32378d322b0633c98/Arc_EnemyMV_Textless.jpg',
+        cover: 'https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltd615715a4615fbb7/61799ab32378d322b0633c98/Arc_EnemyMV_Textless.jpg',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         inventory: 3
     },
-];
+]; */
+
 
 
 export default function HomePage(){
+
+    const [games, setGames] = useState([]);
+    const [featuredGames, setFeaturedGames] = useState([]);
+
+    function loadProducts(){
+        getProducts()
+            .then((res) => {
+                setGames(res.data);
+                setFeaturedGames([res.data[0], res.data[1], res.data[2]]);
+                console.log(res)
+            })
+            .catch((err) => {
+                alert('Erro ao acessar o servidor.');
+                console.log(err)
+                setGames([]);
+                setFeaturedGames([]);
+            });
+    }
+
+    useEffect(() => {
+        loadProducts();
+    }, []);
+
     const noGames = games.length === 0;
     
     return(
@@ -104,7 +129,7 @@ export default function HomePage(){
                                     key={`product${game.id}`} 
                                     name={game.name} 
                                     price={game.price} 
-                                    coverImg={game.coverImg}
+                                    cover={game.cover}
                                     inventory={game.inventory}
                                 />
                             )}

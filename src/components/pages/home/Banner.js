@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import SimpleImageSlider from "react-simple-image-slider";
+import { Link } from "react-router-dom";
 
 export default function Banner({ featuredGame }){
     return(
-        <BannerContainer>
-            <img src={featuredGame.coverImg} alt={featuredGame.name}/>
+        <BannerContainer to={`products/${featuredGame.id}`}>
+            <img src={featuredGame.banner} alt={featuredGame.name}/>
             <BannerTextContainerStyle>
                 <BannerTitleStyle>{featuredGame.name.toUpperCase()}</BannerTitleStyle>
                 <BannerDescriptionStyle>{featuredGame.description}</BannerDescriptionStyle>
@@ -15,11 +15,12 @@ export default function Banner({ featuredGame }){
 }
 
 
-const BannerContainer = styled.section`
+const BannerContainer = styled(Link)`
     width: 1135px;
     height: 72%;
     display: flex;
     margin-left: calc(50vw - (1135px/2));
+    text-decoration: none;
     img{
         width: 795px;
         height: 395px;

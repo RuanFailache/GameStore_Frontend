@@ -4,7 +4,7 @@ import { BsCartPlusFill } from "react-icons/bs"
 import { useContext, useState } from "react";
 import CartContext from "../../contexts/CartContext";
 
-export default function GameCard({ id, name, price, coverImg, inventory }){
+export default function GameCard({ id, name, price, cover, inventory }){
     
     const {productsInCart, setProductsInCart} = useContext(CartContext);    
     
@@ -33,7 +33,7 @@ export default function GameCard({ id, name, price, coverImg, inventory }){
                 :
                 <div/>
             }
-            <img src={coverImg} alt="game-cover"/>
+            <img src={cover} alt="game-cover"/>
             <CardTextContainerStyle>
                 <GameTitleStyle>
                     {name}
