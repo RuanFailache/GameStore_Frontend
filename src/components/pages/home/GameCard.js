@@ -4,11 +4,11 @@ import { BsCartPlusFill } from "react-icons/bs"
 import { useContext, useState } from "react";
 import CartContext from "../../contexts/CartContext";
 
-export default function GameCard({ id, name, price, cover, inventory }){
+export default function GameCard({ id, name, price, cover, stock }){
     
     const {productsInCart, setProductsInCart} = useContext(CartContext);    
     
-    const outOfStock = inventory === 0;
+    const outOfStock = stock === 0;
     const [isInTheCart, setIsInTheCart] = useState(productsInCart.includes(id));
 
     function addToCart(e){
@@ -42,7 +42,7 @@ export default function GameCard({ id, name, price, cover, inventory }){
                     {outOfStock ? '---' 
                         : 
                         <span>
-                            R$ {price} 
+                            R$ {price/100} 
                             <AddToCartIconStyle isInTheCart={isInTheCart} onClick={addToCart}/>
                         </span>
                     }

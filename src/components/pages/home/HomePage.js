@@ -49,7 +49,7 @@ export default function HomePage(){
                                     name={game.name} 
                                     price={game.price} 
                                     cover={game.cover}
-                                    inventory={game.inventory}
+                                    stock={game.stock}
                                 />
                             )}
                         </GameCardsContainerStyle>
