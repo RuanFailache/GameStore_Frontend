@@ -1,11 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
+import Cards from 'react-credit-cards';
+import 'react-credit-cards/es/styles-compiled.css';
 
 export default function PaymentData({setIsPaymentDataEmpty}){
     const [cardNumber, setCardNumber] = useState("");
     const [cardOwner, setCardOwner] = useState("");
     const [cardExpiration, setCardExpiration] = useState("");
     const [cardCVV, setCardCVV] = useState("");
+    const [focus, setFocus] = useState("");
     
     function confirmPaymentData(event){
         event.preventDefault();
@@ -19,31 +22,39 @@ export default function PaymentData({setIsPaymentDataEmpty}){
                 <h2>Dados de pagamento</h2>
                 <PaymentDataInputStyle 
                     placeholder='Número do cartão'
-                    type='text'
+                    type='tel'
+                    name='cardNumber'
                     value={cardNumber}
                     onChange={(e)=> setCardNumber(e.target.value)}
+                    onFocus={(e) => setFocus(e.target.name)}
                     required
                 />
                 <PaymentDataInputStyle 
                     placeholder='Titular do cartão'
                     type='text'
+                    name='cardOwner'
                     value={cardOwner}
                     onChange={(e)=> setCardOwner(e.target.value)}
+                    onFocus={(e) => setFocus(e.target.name)}
                     required
                 />
                 <SmallerInputsContainerStyle>
                     <PaymentDataInputStyle 
                         placeholder='Vencimento'
                         type='text'
+                        name='cardExpiration'
                         value={cardExpiration}
                         onChange={(e)=> setCardExpiration(e.target.value)}
+                        onFocus={(e) => setFocus(e.target.name)}
                         required
                     />
                     <PaymentDataInputStyle 
                         placeholder='CVV'
-                        type='text'
+                        type='tel'
+                        name='cardCVV'
                         value={cardCVV}
                         onChange={(e)=> setCardCVV(e.target.value)}
+                        onFocus={(e) => setFocus(e.target.name)}
                         required
                     />
                 </SmallerInputsContainerStyle>
@@ -51,6 +62,15 @@ export default function PaymentData({setIsPaymentDataEmpty}){
                     Confirmar dados
                 </ConfirmDataButtonStyle>
             </PaymentDataStyle>
+            <CardContainerStyle>
+                <Cards
+                    number={cardNumber}
+                    name={cardOwner}
+                    expiry={cardExpiration}
+                    cvc={cardCVV}
+                    focused={focus}
+                />
+            </CardContainerStyle>
         </PaymentDataContainerStyle>
     );
 }
@@ -62,10 +82,11 @@ const PaymentDataContainerStyle = styled.div`
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 30px;
+    display: flex;
 `;
 
 const PaymentDataStyle = styled.form`
-    width: 360px;
+    width: 330px;
     height: 100%;
 
     h2{
@@ -124,4 +145,10 @@ const ConfirmDataButtonStyle = styled.button`
         cursor: pointer;
         filter: brightness(1.4);
     }
+`;
+
+const CardContainerStyle = styled.div`
+    margin-left: 20px;
+    height: 100%;
+    padding-top: 46px;
 `;
