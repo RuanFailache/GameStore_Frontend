@@ -61,7 +61,7 @@ const PaymentDataContainerStyle = styled.div`
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 30px;
 `;
 
 const PaymentDataStyle = styled.form`
@@ -82,6 +82,7 @@ const PaymentDataInputStyle = styled.input`
     border-radius: 20px;
     margin-top: 15px;
     padding-left: 15px;
+    outline-color: #FF3300;
 
     ::placeholder{
         color: #CECECE;
@@ -100,6 +101,7 @@ const SmallerInputsContainerStyle = styled.div`
     input:last-child{
         width: 20%;
         padding-left: 0;
+        text-align: center;
         ::placeholder{
             text-align: center;
         }

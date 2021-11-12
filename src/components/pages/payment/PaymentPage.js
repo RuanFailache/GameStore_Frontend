@@ -16,6 +16,7 @@ export default function PaymentPage(){
                 />
                 <FinishPurchase 
                     isPaymentDataEmpty={isPaymentDataEmpty}
+                    setIsPaymentDataEmpty={setIsPaymentDataEmpty}
                 />
             </ContentContainerStyle>
         </ContainerStyle>
@@ -25,5 +26,5 @@ export default function PaymentPage(){
 const ContentContainerStyle = styled.div`
     width: 100%;
     display: flex;
-    justify-content: space-between;    
+    justify-content: space-between;
 `;
