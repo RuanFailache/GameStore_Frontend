@@ -1,8 +1,27 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { BsCartPlusFill } from "react-icons/bs"
+import { useContext, useState } from "react";
+import CartContext from "../../contexts/CartContext";
+
 export default function GameCard({ id, name, price, coverImg, inventory }){
+    
+    const {productsInCart, setProductsInCart} = useContext(CartContext);    
+    
     const outOfStock = inventory === 0;
+    const [isInTheCart, setIsInTheCart] = useState(productsInCart.includes(id));
+
+    function addToCart(e){
+        e.preventDefault();
+
+        if(!outOfStock){
+            isInTheCart ? setIsInTheCart(false) : setIsInTheCart(true);
+            isInTheCart? setProductsInCart(productsInCart.filter((prodId) => prodId !== id)) : setProductsInCart([...productsInCart, id]);
+            console.log(productsInCart);
+        }
+
+    }
+
     return(
         <CardStyle to={`/products/${id}`}>
             {
@@ -20,7 +39,13 @@ export default function GameCard({ id, name, price, coverImg, inventory }){
                     {name}
                 </GameTitleStyle>
                 <GamePriceStyle>
-                     {outOfStock ? '---' : <span>R$ {price} <AddToCartIconStyle/></span>}
+                    {outOfStock ? '---' 
+                        : 
+                        <span>
+                            R$ {price} 
+                            <AddToCartIconStyle isInTheCart={isInTheCart} onClick={addToCart}/>
+                        </span>
+                    }
                 </GamePriceStyle>
             </CardTextContainerStyle>
         </CardStyle>
@@ -94,8 +119,8 @@ const GamePriceStyle = styled.div`
 
 const AddToCartIconStyle = styled(BsCartPlusFill)`
     margin-left: 120px;
-    color: gray;
+    color: ${(props) => props.isInTheCart ? '#FF3300' : 'gray'};
     :hover{
-        color: #FF3300;
+        filter: brightness(1.2);
     }
 `;
