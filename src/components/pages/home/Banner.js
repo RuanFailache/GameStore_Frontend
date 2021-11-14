@@ -15,13 +15,15 @@ export default function Banner({ featuredGame }){
 }
 
 const BannerContainer = styled(Link)`
-    width: 1135px;
+    width: 100%;
+    max-width: 1135px;
     height: 72%;
     display: flex;
     align-items: center;
     margin-left: calc(50vw - (1135px/2));
     text-decoration: none;
-    padding: 0 50px;
+    padding: 0 40px;
+
     img{
         width: 795px;
         height: 395px;
@@ -30,6 +32,17 @@ const BannerContainer = styled(Link)`
             filter: brightness(1.2);
             cursor: pointer;
         }
+    }
+
+    @media (max-width: 950px){
+        img{
+            width: 100%;
+        }
+        padding: 0;
+        margin: 0;
+    }
+    @media (max-width: 600px){
+        img{width: 90vw;} 
     }
 `;
 
@@ -40,6 +53,10 @@ const BannerTextContainerStyle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @media (max-width: 950px){
+        display: none;
+    }
 `;
 
 const BannerTitleStyle = styled.h3`

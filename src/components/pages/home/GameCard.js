@@ -78,6 +78,10 @@ const CardStyle = styled(Link)`
         filter: brightness(1.2);
         cursor: pointer;
     }
+
+    @media (max-width: 600px){
+        margin-top: 5px;
+    }
  
 `;
 

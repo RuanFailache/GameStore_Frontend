@@ -46,9 +46,9 @@ export default function HomePage(){
                 <NoGamesStyle>Não há jogos cadastrados :(</NoGamesStyle>
                 :  
                 <>  
-                    <BannerSectionStyle width={45000} autoPlay={true} infiniteLoop={true} interval={5000}>
+                    <BannerCarouselSectionStyle width={45000} autoPlay={true} infiniteLoop={true} interval={5000}>
                         {featuredGames.map((game) => <Banner key={game.id} featuredGame={game}/>)}
-                    </BannerSectionStyle>
+                    </BannerCarouselSectionStyle>
                     <ContainerStyle>
                         <CatalogTitleStyle>
                             Jogos
@@ -72,30 +72,45 @@ export default function HomePage(){
     );
 }
 
-const BannerSectionStyle = styled(Carousel)`
+const BannerCarouselSectionStyle = styled(Carousel)`
     width: 100%;
     height: 560px;
     background-color: #212121;
-    position: relative;
 
     display: flex;
     flex: wrap;
     align-items: center;
+    justify-content: center;
 
+    @media (max-width: 950px){
+        padding-left: 40px;
+        height: 30%;
+    }
+    @media (max-width: 600px){
+        height: 20%;
+        padding: 0;
+    }
 `;
-
 
 const CatalogTitleStyle = styled.div`
     margin-top: 30px;
     font-size: 40px;
     font-weight: 700;
     color: #FF3300;
+    @media (max-width: 600px){
+        text-align: center;
+        margin-bottom: 20px;
+    }
 `;
 
 const GameCardsContainerStyle = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    @media (max-width: 600px){
+        justify-content: center;
+    }
     
 `;
 
