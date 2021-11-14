@@ -1,32 +1,57 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router';
+import axios from 'axios'
 
 import ProductImages from './ProductImages';
 
 import { ContainerStyle, FilledButtonStyle, OutlineButtonStyle, PriceStyle, SideBarStyle } from '../../shared/sharedStyles';
 import { ContentStyle, DescriptionStyle } from './ProductStyle';
 
+import CartContext from '../../contexts/CartContext';
+
 const ProductPage = () => {
-  const title = "FIFA 2022";
-  const price = 299.99;
-  const description = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+  const { productInCart, setProductsInCart } = useContext(CartContext)
+  const [product, setProduct] = useState(null)
+  const { id } = useParams()
+  const navigateTo = useNavigate()
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const result = await axios.get(`http://localhost:4000/products/${id}`);
+        setProduct({ ...result.data });
+      } catch {
+        setProduct(null)
+      }
+    })()
+  }, [id])
+
+  const goToPaymentPage = () => {
+    setProductsInCart([...productInCart, id]);
+    navigateTo('/cart')
+    console.log()
+  }
 
   return (
     <ContainerStyle>
-      <ContentStyle>
-        <ProductImages />
+      {product === null ? null : (
+        <>
+          <ContentStyle>
+            <ProductImages images={[product.cover, product.banner, product["first-image"], product["second-image"]]} />
 
-        <DescriptionStyle>
-          <h2>{title}</h2>
-          <p>{description}</p>
-        </DescriptionStyle>
-      </ContentStyle>
+            <DescriptionStyle>
+              <h2>{product.name}</h2>
+              <p>{product.description}</p>
+            </DescriptionStyle>
+          </ContentStyle>
 
-      <SideBarStyle>
-        <PriceStyle>R$ {price}</PriceStyle>
-        <p>Parcele em até 12x no <strong>cartão de credito</strong> sem juros</p>
-        <FilledButtonStyle>Compre agora</FilledButtonStyle>
-        <OutlineButtonStyle>Adicione ao carrinho</OutlineButtonStyle>
-      </SideBarStyle>
+          <SideBarStyle>
+            <PriceStyle>R$ {String(product.price / 100).replace('.', ',')}</PriceStyle>
+            <p>Parcele em até 12x no <strong>cartão de credito</strong> sem juros</p>
+            <FilledButtonStyle onClick={goToPaymentPage}>Compre agora</FilledButtonStyle>
+            <OutlineButtonStyle onClick={() => setProductsInCart(id)}>Adicione ao carrinho</OutlineButtonStyle>
+          </SideBarStyle>
+        </>)}
     </ContainerStyle>
   )
 }
