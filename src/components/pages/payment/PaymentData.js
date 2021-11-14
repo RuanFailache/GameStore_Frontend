@@ -150,5 +150,5 @@ const ConfirmDataButtonStyle = styled.button`
 const CardContainerStyle = styled.div`
     margin-left: 20px;
     height: 100%;
-    padding-top: 46px;
+    padding-top: 48px;
 `;

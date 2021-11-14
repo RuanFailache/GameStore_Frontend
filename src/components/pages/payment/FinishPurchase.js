@@ -2,6 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import ReactModal from "react-modal";
 import { useNavigate } from "react-router";
+import { cartProds } from "./mockedData";
+
 export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmpty }){
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -10,7 +12,6 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
     
     function selectPaymentMethod(event){
         setPaymentMethod(event.target.value);
-        console.log(paymentMethod);
     }
 
     function openConfirmationModal(event){
@@ -25,13 +26,35 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
         navigate("/");
     }
 
+    const isCartEmpty = cartProds.length === 0;
+
+    let totalValue = 0;
+    if(!isCartEmpty){
+        cartProds.forEach((prod) => {
+            totalValue += (prod.price*prod.amount);
+        });
+    }
+
+    const body = {
+        userId: '',
+        method: paymentMethod,
+        products: cartProds.map((prod) => {
+            return [{productId: prod.id, amount: prod.amount}]
+        }),
+        
+    }
+
+
     return(
+        isCartEmpty ? 
+        <p>Não há produtos no carrinho</p>
+        :
         <>
             <FinishPurchaseContainerStyle>
                 <ContentContainerStyle>
                     <PriceStyle>
                         <span>Valor total da compra</span>
-                        <span> R$ 899,97</span>
+                        <span> R$ {totalValue/100}</span>
                     </PriceStyle>
                     <PaymentMethodsStyle onSubmit={openConfirmationModal}>
                         <p>Formas de pagamento</p>
