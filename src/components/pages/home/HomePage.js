@@ -4,6 +4,9 @@ import { getProducts } from "../../../services/api";
 import { ContainerStyle } from "../../shared/sharedStyles";
 import Banner from "./Banner";
 import GameCard from "./GameCard";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 export default function HomePage(){
 
@@ -27,6 +30,14 @@ export default function HomePage(){
         loadProducts();
     }, []);
 
+    function handleLeftClick(event){
+        event.preventDefault();
+    }
+
+    function handleRightClick(event){
+        event.preventDefault();
+    }
+
     const noGames = games.length === 0;
     
     return(
@@ -34,7 +45,8 @@ export default function HomePage(){
             {noGames ? 
                 <NoGamesStyle>Não há jogos cadastrados :(</NoGamesStyle>
                 :  
-                <>  <BannerSectionStyle>
+                <>  
+                    <BannerSectionStyle width={45000} autoPlay={true} infiniteLoop={true} interval={5000}>
                         {featuredGames.map((game) => <Banner key={game.id} featuredGame={game}/>)}
                     </BannerSectionStyle>
                     <ContainerStyle>
@@ -60,16 +72,16 @@ export default function HomePage(){
     );
 }
 
-const BannerSectionStyle = styled.section`
+const BannerSectionStyle = styled(Carousel)`
     width: 100%;
     height: 560px;
     background-color: #212121;
+    position: relative;
 
     display: flex;
     flex: wrap;
     align-items: center;
 
-    overflow-x: scroll;
 `;
 
 
@@ -100,6 +112,33 @@ const NoGamesStyle = styled.div`
     align-items: center;
     justify-content: center;
     margin: calc(50vh - 100px) auto;
+`;
 
 
+
+
+const IconLeftStyle = styled(AiOutlineLeft)`
+    z-index: 5;
+    position: absolute;
+    font-size: 30px;
+    color: white;
+    left: 30px;
+
+    :hover{
+        filter: brightness(0.7);
+        cursor: pointer;
+    }
+`;
+
+const IconRightStyle = styled(AiOutlineRight)`
+    z-index: 5;
+    font-size: 30px;
+    color: white;
+    position: absolute;
+    left: calc(100% - 150px);
+
+    :hover{
+        filter: brightness(0.7);
+        cursor: pointer;
+    }
 `;

@@ -14,13 +14,14 @@ export default function Banner({ featuredGame }){
     );
 }
 
-
 const BannerContainer = styled(Link)`
     width: 1135px;
     height: 72%;
     display: flex;
+    align-items: center;
     margin-left: calc(50vw - (1135px/2));
     text-decoration: none;
+    padding: 0 50px;
     img{
         width: 795px;
         height: 395px;
@@ -33,7 +34,7 @@ const BannerContainer = styled(Link)`
 `;
 
 const BannerTextContainerStyle = styled.div`
-    width: 270px;
+    width: 250px;
     margin-left: 4%;
     color: white;
     display: flex;
@@ -72,6 +73,6 @@ const BannerPriceStyle = styled.p`
     :hover{
             filter: brightness(1.2);
             cursor: pointer;
-        }
-    
+        }    
 `;
+
