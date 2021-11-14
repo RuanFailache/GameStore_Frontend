@@ -27,7 +27,9 @@ const ProductPage = () => {
   }, [id])
 
   const goToPaymentPage = () => {
-    setProductsInCart([...productInCart, id]);
+    if (!productInCart.includes(id)) {
+      setProductsInCart([...productInCart, id]);
+    }
     navigateTo('/cart')
     console.log()
   }
@@ -49,7 +51,7 @@ const ProductPage = () => {
             <PriceStyle>R$ {String(product.price / 100).replace('.', ',')}</PriceStyle>
             <p>Parcele em até 12x no <strong>cartão de credito</strong> sem juros</p>
             <FilledButtonStyle onClick={goToPaymentPage}>Compre agora</FilledButtonStyle>
-            <OutlineButtonStyle onClick={() => setProductsInCart(id)}>Adicione ao carrinho</OutlineButtonStyle>
+            <OutlineButtonStyle onClick={() => productInCart.includes(id) ? setProductsInCart(id) : null}>Adicione ao carrinho</OutlineButtonStyle>
           </SideBarStyle>
         </>)}
     </ContainerStyle>
