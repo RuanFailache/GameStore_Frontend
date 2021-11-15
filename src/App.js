@@ -10,7 +10,7 @@ import CartPage from "./components/pages/cart/CartPage";
 
 export default function App(){
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-    const [productsInCart, setProductsInCart] = useState([2, 3, 4]);
+    const [productsInCart, setProductsInCart] = useState([]);
     const [orderList, setOrderList] = useState([]);
 
     return(
