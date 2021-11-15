@@ -6,7 +6,7 @@ export default function CartItems({productsList, changeAmount}) {
         <CartItemsStyle>
             {productsList.length > 0
             ? productsList.map((game, index) => (
-                <CartItem game={game} index={index} changeAmount={changeAmount} />
+                <CartItem game={game} index={index} changeAmount={changeAmount} key={index}/>
             ))
             : <EmptyCart>Carrinho vazio!</EmptyCart>}
         </CartItemsStyle>
