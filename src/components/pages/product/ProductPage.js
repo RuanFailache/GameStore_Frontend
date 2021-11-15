@@ -18,7 +18,8 @@ const ProductPage = () => {
   useEffect(() => {
     (async function () {
       try {
-        const result = await axios.get(`http://localhost:4000/products/${id}`);
+        const result = await axios.get(`https://gamestore-back.herokuapp.com`);
+        console.log(result.data)
         setProduct({ ...result.data });
       } catch {
         setProduct(null)
