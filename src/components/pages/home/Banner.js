@@ -60,7 +60,7 @@ const BannerTextContainerStyle = styled.div`
 `;
 
 const BannerTitleStyle = styled.h3`
-    font-size: 35px;
+    font-size: 27px;
     font-weight: 700;
     margin-bottom: 15px;
     :hover{
