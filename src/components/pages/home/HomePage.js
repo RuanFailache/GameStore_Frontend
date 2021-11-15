@@ -30,14 +30,6 @@ export default function HomePage(){
         loadProducts();
     }, []);
 
-    function handleLeftClick(event){
-        event.preventDefault();
-    }
-
-    function handleRightClick(event){
-        event.preventDefault();
-    }
-
     const noGames = games.length === 0;
     
     return(
