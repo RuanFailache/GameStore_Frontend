@@ -34,8 +34,9 @@ export const SideBarStyle = styled.aside`
 
   @media (max-width: 1135px) {
     position: initial;
-    top: 200px;
-    left: 0;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 `;
 
