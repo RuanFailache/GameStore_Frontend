@@ -8,6 +8,7 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import Header from "../../shared/Header";
+import Footer from "../../shared/Footer"
 
 export default function HomePage(){
 
@@ -60,6 +61,7 @@ export default function HomePage(){
                             )}
                         </GameCardsContainerStyle>
                     </ContainerStyle>
+                    <Footer/>
                 </>
             }
         </>
