@@ -41,7 +41,7 @@ export default function GameCard({ id, name, price, cover, stock }){
                     {outOfStock ? '---' 
                         : 
                         <p>
-                            <span>R$ {price/100}</span>
+                            <span>R$ {(price/100).toFixed(2)}</span>
                             <AddToCartIconStyle isInTheCart={isInTheCart} onClick={addToCart}/>
                         </p>
                     }
