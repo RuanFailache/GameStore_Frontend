@@ -43,14 +43,18 @@ const HeaderDiv = styled.div`
 `;
 
 const HeaderStyle = styled.div`
-    height: 100%;
-    width: 1135px;
-    postion: fixed;
+    height: 80px;
+    width: 100%;
+    padding-left: calc((100vw - 1135px)/2);
+    padding-right: calc((100vw - 1135px)/2);
+    position: fixed;
     top: 0;
     margin: 0 auto 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: #E5E5E5;
+    z-index: 5;
 
     @media (max-width: 1145px) {
         width: calc(100% - 60px);
