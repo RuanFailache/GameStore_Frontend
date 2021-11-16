@@ -14,7 +14,7 @@ export default function App(){
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
     const [productsInCart, setProductsInCart] = useState([]);
-    
+
     
     return(
       <UserContext.Provider value={{user, setUser}}>
