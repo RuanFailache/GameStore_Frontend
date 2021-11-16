@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ReactModal from "react-modal";
 import { useNavigate } from "react-router";
 import { cartProds } from "./mockedData";
+import { postPurchase } from "../../../services/api";
 
 export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmpty }){
 
@@ -21,10 +22,18 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
     }
 
     function makePurchase(){
-        setModalIsOpen(false);
-        alert("Compra efetuada com sucesso!");
-        setIsPaymentDataEmpty(true);
-        navigate("/");
+
+        postPurchase(body)
+            .then(() => {
+                setModalIsOpen(false);
+                alert("Compra efetuada com sucesso!");
+                setIsPaymentDataEmpty(true);
+                navigate("/");
+            })
+            .catch(() => {
+                setModalIsOpen(false);
+                alert('Houve um erro ao finalizar a compra.');
+            });   
     }
 
     const isCartEmpty = cartProds.length === 0;
@@ -38,7 +47,7 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
 
     const body = {
         userId: '10',
-        method: paymentMethod,
+        paymentMmethod: paymentMethod,
         products: cartProds.map((prod) => {
             return [{productId: prod.id, amount: prod.amount}]
         }),  
@@ -54,7 +63,7 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
                 <ContentContainerStyle>
                     <PriceStyle>
                         <span>Valor total da compra</span>
-                        <span> R$ {totalValue/100}</span>
+                        <span> R$ {(totalValue/100).toFixed(2)}</span>
                     </PriceStyle>
                     <PaymentMethodsStyle onSubmit={openConfirmationModal}>
                         <p>Formas de pagamento</p>

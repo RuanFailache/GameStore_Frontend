@@ -12,8 +12,9 @@ export default function PaymentData({setIsPaymentDataEmpty}){
     
     function confirmPaymentData(event){
         event.preventDefault();
-        setIsPaymentDataEmpty(false);
-
+        let isValidExpirationDate = (Number(cardExpiration[0] + cardExpiration[1]) <= 12) &&  (Number(cardExpiration[3] + cardExpiration[4]) > 21);
+        
+        isValidExpirationDate ? setIsPaymentDataEmpty(false) : alert("Insira uma data válida.");   
     }
 
     return(
@@ -22,9 +23,10 @@ export default function PaymentData({setIsPaymentDataEmpty}){
                 <h2>Dados de pagamento</h2>
                 <PaymentDataInputStyle 
                     placeholder='Número do cartão'
-                    type='tel'
+                    type='string'
                     name='cardNumber'
                     value={cardNumber}
+                    pattern='[0-9]{16}'
                     onChange={(e)=> setCardNumber(e.target.value)}
                     onFocus={(e) => setFocus(e.target.name)}
                     required
@@ -44,6 +46,7 @@ export default function PaymentData({setIsPaymentDataEmpty}){
                         type='text'
                         name='cardExpiration'
                         value={cardExpiration}
+                        pattern='[0-9]{2}/[0-9]{2}'
                         onChange={(e)=> setCardExpiration(e.target.value)}
                         onFocus={(e) => setFocus(e.target.name)}
                         required
@@ -53,6 +56,7 @@ export default function PaymentData({setIsPaymentDataEmpty}){
                         type='tel'
                         name='cardCVV'
                         value={cardCVV}
+                        pattern='[0-9]{3}'
                         onChange={(e)=> setCardCVV(e.target.value)}
                         onFocus={(e) => setFocus(e.target.name)}
                         required

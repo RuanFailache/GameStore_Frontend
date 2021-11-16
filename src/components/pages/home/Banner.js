@@ -8,7 +8,7 @@ export default function Banner({ featuredGame }){
             <BannerTextContainerStyle>
                 <BannerTitleStyle>{featuredGame.name.toUpperCase()}</BannerTitleStyle>
                 <BannerDescriptionStyle>{featuredGame.description}</BannerDescriptionStyle>
-                <BannerPriceStyle>R$ {featuredGame.price/100}</BannerPriceStyle>
+                <BannerPriceStyle>R$ {(featuredGame.price/100).toFixed(2)}</BannerPriceStyle>
             </BannerTextContainerStyle>
         </BannerContainer>
     );

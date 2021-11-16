@@ -6,4 +6,9 @@ function getProducts(){
     return promise;
 }
 
-export{ getProducts }
+function postPurchase(body){
+    const promise = axios.post(`${URL}/purchases`, body);
+    return promise;
+}
+
+export{ getProducts, postPurchase }
