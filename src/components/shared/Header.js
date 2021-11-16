@@ -40,7 +40,6 @@ const HeaderDiv = styled.div`
     width: 100%;
     margin: 0 0 20px 0;
     position: relative;
-
 `;
 
 const HeaderStyle = styled.div`
