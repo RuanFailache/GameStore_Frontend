@@ -7,7 +7,6 @@ import SignUpPage from './components/pages/login/SignUpPage';
 import { Routes, Route } from "react-router-dom";
 import CartContext from './components/contexts/CartContext';
 import { useState } from 'react';
-import Footer from './components/shared/Footer';
 
 export default function App() {
   const [productsInCart, setProductsInCart] = useState([]);
@@ -19,7 +18,6 @@ export default function App() {
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
       </Routes>
-      <Footer/>
     </CartContext.Provider>
   );
 }
