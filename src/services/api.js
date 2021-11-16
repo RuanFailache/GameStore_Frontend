@@ -19,8 +19,14 @@ const doSignIn = (body) => {
   return axios.post(`${URL}/sign-in`, body)
 }
 
+function postPurchase(body){
+    const promise = axios.post(`${URL}/purchases`, body);
+    return promise;
+}
+
 export {
   getProducts,
+  postPurchase,
   getProduct,
   doSignUp,
   doSignIn,
