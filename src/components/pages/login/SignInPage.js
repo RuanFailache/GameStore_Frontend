@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { doSignIn } from '../../../services/api'
 
 import { FilledButtonStyle } from '../../shared/sharedStyles'
 import { FormStyle, InputStyle, AlertStyle } from './loginStyles'
@@ -18,9 +19,19 @@ const SignInPage = () => {
     }
   }, [email, password])
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setMessageError('testando')
+    try {
+      const result = await doSignIn({ email, password });
+      localStorage.setItem("user", JSON.stringify({
+        token: result.data.token
+      }))
+    } catch (err) {
+      const { status } = err.response;
+      if (status === 404) {
+        setMessageError('Dados de login inválidos!');
+      }
+    }
   }
 
   return (
@@ -30,7 +41,7 @@ const SignInPage = () => {
       <InputStyle value={password} onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Senha' />
       {messageError !== '' ? <AlertStyle><span>!</span>{messageError}</AlertStyle> : null}
       <FilledButtonStyle type='submit' disabled={isDisabled}>Entrar</FilledButtonStyle>
-      <Link to='/sign-up'>Não possui uma conta? Crie uma agora!</Link>
+      <Link to='/sign-up'>Não possui uma conta?<br />Crie uma agora!</Link>
     </FormStyle>
   )
 }

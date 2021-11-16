@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { doSignUp } from '../../../services/api'
 
 import { FilledButtonStyle } from '../../shared/sharedStyles'
 import { FormStyle, InputStyle, AlertStyle } from './loginStyles'
@@ -9,7 +10,7 @@ const SignUpPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-  const [messageError, setMessageError] = useState("")
+  const [message, setMessage] = useState("")
   const [isDisabled, setIsDisabled] = useState(true)
 
   useEffect(() => {
@@ -18,15 +19,28 @@ const SignUpPage = () => {
     } else {
       setIsDisabled(true)
     }
-  }, [email, password])
+  }, [name, email, password, confirmPassword])
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
     if (password !== confirmPassword) {
-      setMessageError('As senhas devem ser iguais')
+      setMessage('As senhas devem ser iguais')
       setPassword('')
       setConfirmPassword('')
+      return;
+    }
+    try {
+      await doSignUp({ name, password, email });
+      setName('')
+      setEmail('')
+      setPassword('')
+      setConfirmPassword('')
+      setMessage('Cadastro efetuado com sucesso!')
+    } catch (err) {
+      const { status } = err.response;
+      if (status === 409) {
+        setMessage('E-mail já existente!')
+      }
     }
   }
 
@@ -37,7 +51,7 @@ const SignUpPage = () => {
       <InputStyle value={email} onChange={(e) => setEmail(e.target.value)} type='text' placeholder='E-mail' />
       <InputStyle value={password} onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Senha' />
       <InputStyle value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type='password' placeholder='Confirme sua senha' />
-      {messageError !== '' ? <AlertStyle><span>!</span>{messageError}</AlertStyle> : null}
+      {message !== '' ? <AlertStyle><span>!</span>{message}</AlertStyle> : null}
       <FilledButtonStyle type='submit' disabled={isDisabled}>Entrar</FilledButtonStyle>
       <Link to='/sign-in'>Já possui uma conta?</Link>
     </FormStyle>

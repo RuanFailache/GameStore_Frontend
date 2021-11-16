@@ -1,16 +1,15 @@
 import styled from 'styled-components'
 
 export const FormStyle = styled.form`
-  position: fixed;
-  top: 120px;
-  left: calc((100% - 500px) / 2);
   display: flex;
-  padding: 60px;
   width: 500px;
+  margin: 120px auto 0;
+  padding: 60px;
   flex-flow: nowrap column;
   gap: 7.5px;
   border-radius: 5px;
   background-color: white;
+  box-sizing: border-box;
 
   & > h1 {
     display: block;
@@ -37,6 +36,12 @@ export const FormStyle = styled.form`
     text-align: center;
     text-decoration: none;
     color: #000;
+  }
+
+  @media (max-width: 1135px) {
+    position: initial;
+    width: calc(100% - 60px);
+    padding: 30px;
   }
 `;
 
