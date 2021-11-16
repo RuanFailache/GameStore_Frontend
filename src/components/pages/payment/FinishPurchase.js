@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { postPurchase } from "../../../services/api";
 import UserContext from "../../shared/contexts/UserContext";
 import OrderContext from "../../shared/contexts/OrderContext";
+import CartContext from "../../shared/contexts/CartContext";
 
 export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmpty }){
 
@@ -14,6 +15,7 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
     const { user } = useContext(UserContext);
     const userId = user.user.userId;
     const { order } = useContext(OrderContext);
+    const { setProductsInCart } = useContext(CartContext);
 
     function selectPaymentMethod(event){
         setPaymentMethod(event.target.value);
@@ -31,6 +33,7 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
                 setModalIsOpen(false);
                 alert("Compra efetuada com sucesso!");
                 setIsPaymentDataEmpty(true);
+                setProductsInCart([]);
                 navigate("/");
             })
             .catch((err) => {
