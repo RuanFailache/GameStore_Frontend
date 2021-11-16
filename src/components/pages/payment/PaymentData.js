@@ -13,7 +13,7 @@ export default function PaymentData({setIsPaymentDataEmpty}){
     function confirmPaymentData(event){
         event.preventDefault();
         let isValidExpirationDate = (Number(cardExpiration[0] + cardExpiration[1]) <= 12) &&  (Number(cardExpiration[3] + cardExpiration[4]) > 21);
-        
+
         isValidExpirationDate ? setIsPaymentDataEmpty(false) : alert("Insira uma data válida.");   
     }
 
@@ -80,13 +80,23 @@ export default function PaymentData({setIsPaymentDataEmpty}){
 }
 
 const PaymentDataContainerStyle = styled.div`
-    width: 700px;
-    height: 355px;
+    width: 61%;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 30px;
     display: flex;
+
+    @media (max-width: 1080px){
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 750px){
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
 `;
 
 const PaymentDataStyle = styled.form`
@@ -97,6 +107,10 @@ const PaymentDataStyle = styled.form`
         font-size: 25px;
         font-weight: 700;
         margin-bottom: 10px;
+    }
+
+    @media (max-width: 750px){
+       padding-right: 15px;
     }
 `;
 
@@ -149,10 +163,18 @@ const ConfirmDataButtonStyle = styled.button`
         cursor: pointer;
         filter: brightness(1.4);
     }
+
+    @media (max-width: 750px){
+        width: 100%;
+    }
 `;
 
 const CardContainerStyle = styled.div`
     margin-left: 20px;
     height: 100%;
     padding-top: 48px;
+
+    @media (max-width: 750px){
+        margin: 0;
+    }
 `;

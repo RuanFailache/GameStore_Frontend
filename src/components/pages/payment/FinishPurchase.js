@@ -30,9 +30,15 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
                 setIsPaymentDataEmpty(true);
                 navigate("/");
             })
-            .catch(() => {
+            .catch((err) => {
                 setModalIsOpen(false);
-                alert('Houve um erro ao finalizar a compra.');
+                const statusCode = err.response.status;
+                if(statusCode === 400){
+                    alert('Houve um erro ao finalizar a compra.');
+                }
+                else{
+                    alert('Erro de servidor.');
+                }
             });   
     }
 
@@ -99,7 +105,7 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
 }
 
 const FinishPurchaseContainerStyle = styled.div`
-    width: 400px;
+    width: 35%;
     height: 355px;
     background-color: white;
     border-radius: 5px;
@@ -107,6 +113,16 @@ const FinishPurchaseContainerStyle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 1080px){
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 750px){
+        width: 100%;
+        border-radius: 0;
+    }
 `;
 
 const ContentContainerStyle = styled.div`
