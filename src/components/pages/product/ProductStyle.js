@@ -17,11 +17,10 @@ export const ContentStyle = styled.section`
   @media (max-width: 1135px) {
     position: initial;
     width: 100%;
+    display: block;
+    height: fit-content;
+    margin-top: 90px;
   }
-`
-
-export const ProductImagesStyle = styled.section`
-  display: block;
 `
 
 export const CoverStyle = styled.img`
@@ -30,6 +29,11 @@ export const CoverStyle = styled.img`
   height: 500px;
   object-fit: cover;
   border-radius: 5px;
+
+  @media (max-width: 1135px) {
+    width: 100%;
+    height: 300px;
+  }
 `
 
 export const ImageListStyle = styled.ul`
@@ -52,18 +56,22 @@ export const ImageListStyle = styled.ul`
     border-radius: 5px;
     cursor: pointer;
   }
+
+  @media (max-width: 1135px) {
+    width: 100%;
+  }
 `
 
 export const DescriptionStyle = styled.article`
   display: block;
   width: 300px;
+  margin-top: 60px;
   clear: right;
 
   & > h2 {
     font-size: 28px;
     line-height: 32px;
     font-weight: 700;
-    margin-top: 60px;
     margin-bottom: 15px;
   }
 
@@ -71,4 +79,19 @@ export const DescriptionStyle = styled.article`
     font-size: 16px;
     line-height: 24px;
   }
+
+  @media (max-width: 1135px) {
+    width: 100%;
+    margin-top: 30px;
+  }
+`
+
+export const NotFound = styled.p`
+  display: block;
+  text-align: center;
+  margin-top: 240px;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: bold;
+  color: #a6a6a6;
 `

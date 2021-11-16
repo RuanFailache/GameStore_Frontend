@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
-import { CoverStyle, ImageListStyle, ProductImagesStyle } from './ProductStyle'
+import { CoverStyle, ImageListStyle } from './ProductStyle'
 
 const ProductImages = ({ images }) => {
   const [actualImage, setActualImage] = useState(images[0])
 
   return (
-    <ProductImagesStyle>
+    <section>
       <CoverStyle src={actualImage} alt="" />
 
       <ImageListStyle>
@@ -16,7 +16,7 @@ const ProductImages = ({ images }) => {
           </li>
         ))}
       </ImageListStyle>
-    </ProductImagesStyle>
+    </section>
   )
 }
 

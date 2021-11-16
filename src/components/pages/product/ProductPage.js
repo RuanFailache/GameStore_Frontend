@@ -1,43 +1,65 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import axios from 'axios'
 
 import ProductImages from './ProductImages';
 
 import { ContainerStyle, FilledButtonStyle, OutlineButtonStyle, PriceStyle, SideBarStyle } from '../../shared/sharedStyles';
-import { ContentStyle, DescriptionStyle } from './ProductStyle';
+import { ContentStyle, DescriptionStyle, NotFound } from './ProductStyle';
 
 import CartContext from '../../contexts/CartContext';
 
+import { getProduct } from '../../../services/api';
+
 const ProductPage = () => {
-  const { productInCart, setProductsInCart } = useContext(CartContext)
+  const { productsInCart, setProductsInCart } = useContext(CartContext)
+
   const [product, setProduct] = useState(null)
+  const [onCart, setOnCart] = useState(false)
+
   const { id } = useParams()
+
   const navigateTo = useNavigate()
 
   useEffect(() => {
-    (async function () {
-      try {
-        const result = await axios.get(`https://gamestore-back.herokuapp.com`);
-        console.log(result.data)
-        setProduct({ ...result.data });
-      } catch {
-        setProduct(null)
+    let isActive = true
+
+    if (isActive) {
+      (async function () {
+        try {
+          const result = await getProduct(id);
+          setProduct({ ...result.data })
+        } catch {
+          setProduct(null)
+        }
+      })()
+
+      if (productsInCart.includes(id)) {
+        setOnCart(true)
       }
-    })()
-  }, [id])
+    }
+
+    return () => {
+      isActive = false;
+    }
+  }, [id, productsInCart])
 
   const goToPaymentPage = () => {
-    if (!productInCart.includes(id)) {
-      setProductsInCart([...productInCart, id]);
+    if (!productsInCart.includes(id)) {
+      addToCart();
     }
     navigateTo('/cart')
     console.log()
   }
 
+  const addToCart = () => {
+    console.log(productsInCart)
+    setProductsInCart([...productsInCart, id]);
+    setOnCart(true);
+  }
+
   return (
     <ContainerStyle>
-      {product === null ? null : (
+      {product === null ? <NotFound>Jogo indisponivel ou não encontrado!</NotFound> : (
         <>
           <ContentStyle>
             <ProductImages images={[product.cover, product.banner, product["first-image"], product["second-image"]]} />
@@ -51,8 +73,14 @@ const ProductPage = () => {
           <SideBarStyle>
             <PriceStyle>R$ {String(product.price / 100).replace('.', ',')}</PriceStyle>
             <p>Parcele em até 12x no <strong>cartão de credito</strong> sem juros</p>
-            <FilledButtonStyle onClick={goToPaymentPage}>Compre agora</FilledButtonStyle>
-            <OutlineButtonStyle onClick={() => productInCart.includes(id) ? setProductsInCart(id) : null}>Adicione ao carrinho</OutlineButtonStyle>
+
+            <FilledButtonStyle onClick={goToPaymentPage}>
+              Compre agora
+            </FilledButtonStyle>
+
+            <OutlineButtonStyle onClick={addToCart} disabled={onCart}>
+              {onCart ? 'Adicionado' : 'Adicione ao carrinho'}
+            </OutlineButtonStyle>
           </SideBarStyle>
         </>)}
     </ContainerStyle>
