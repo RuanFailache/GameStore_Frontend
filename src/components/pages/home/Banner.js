@@ -25,7 +25,7 @@ const BannerContainer = styled(Link)`
     padding: 0 40px;
 
     img{
-        width: 795px;
+        width: 740px;
         height: 395px;
 
         :hover{

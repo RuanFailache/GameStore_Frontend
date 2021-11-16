@@ -68,6 +68,7 @@ const BannerCarouselSectionStyle = styled(Carousel)`
     width: 100%;
     height: 560px;
     background-color: #212121;
+    padding-left: 35px;
 
     display: flex;
     flex: wrap;
@@ -80,7 +81,7 @@ const BannerCarouselSectionStyle = styled(Carousel)`
     }
     @media (max-width: 600px){
         height: 20%;
-        padding: 0;
+
     }
 `;
 
@@ -99,7 +100,6 @@ const GameCardsContainerStyle = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 100%;
 
     @media (max-width: 600px){
         justify-content: center;
