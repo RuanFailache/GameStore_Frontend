@@ -53,6 +53,14 @@ const SidebarStyle = styled.div`
     flex-direction: column;
     justify-content: space-between;
     padding: 30px;
+
+    @media (max-width: 1145px) {
+        width: calc(((100vw - 60px)/100) * 30);
+    }
+
+    @media (max-width: 870px) {
+        width: calc(100% - 60px);
+    }
 `;
 
 const TotalPriceInfo = styled.div`

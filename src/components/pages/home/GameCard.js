@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { BsCartPlusFill } from "react-icons/bs"
 import { useContext, useState } from "react";
-import CartContext from "../../contexts/CartContext";
+import CartContext from "../../shared/contexts/CartContext";
 
 export default function GameCard({ id, name, price, cover, stock }){
     

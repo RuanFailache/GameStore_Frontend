@@ -37,6 +37,10 @@ const CartItemStyle = styled.div`
         width: 200px;
         text-align: center;
     }
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
 `;
 
 const ItemPrice = styled.div`

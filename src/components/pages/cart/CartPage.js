@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components"
-import { getProductById } from "../../../services/api";
+import { getProduct } from "../../../services/api";
 import UserContext from "../../shared/contexts/UserContext";
-import CartContext from "../../shared/contexts/CartContext";
+import CartContext from '../../shared/contexts/CartContext';
 import { useNavigate } from "react-router";
 import Header from "../../shared/Header";
 import CartItems from "./components/CartItems";
@@ -15,25 +15,20 @@ export default function CartPage() {
     let navigate = useNavigate();
 
     useEffect(() => {
-        if(user) {
-            alert('Por favor, efetue login para visualizar seu carrinho!');
-            navigate("/login");
-        } else {
-            productsInCart.forEach(gameId => {
-                getProductById(gameId)
-                    .then((res) => {
-                        let game = res.data;
-                        game.amount = 1;
-                        let list = productsList;
-                        list.push(game);
-                        setProductsList([...list]);
-                    })
-                    .catch((err) => {
-                        alert('Erro ao acessar o servidor.');
-                        setProductsList([]);
-                    })
+        productsInCart.forEach(gameId => {
+            getProduct(gameId)
+                .then((res) => {
+                    let game = res.data;
+                    game.amount = 1;
+                    let list = productsList;
+                    list.push(game);
+                    setProductsList([...list]);
+                })
+                .catch((err) => {
+                    alert('Erro ao acessar o servidor.');
+                    setProductsList([]);
+                })
             })
-        }
     }, []); //eslint-disable-line react-hooks/exhaustive-deps
 
     function changeAmount(index, operation) {
@@ -73,7 +68,7 @@ const Body = styled.div`
 `;
 
 const Container = styled.main`
-    display: block flex;
+    display: flex;
     justify-content: space-between;
     min-height: calc(100vh - 240px);
     width: 1135px;
@@ -82,7 +77,12 @@ const Container = styled.main`
     background: #E5E5E5;
 
     @media (max-width: 1145px) {
-        width: calc(100% - 60px);
+        width: calc(100vw - 60px);
+    }
+
+    @media (max-width: 870px) {
+        flex-direction: column;
+        width: calc(100vw - 60px);
     }
 `;
 
