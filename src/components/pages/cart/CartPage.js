@@ -4,7 +4,6 @@ import { getProductById } from "../../../services/api";
 import UserContext from "../../shared/contexts/UserContext";
 import CartContext from "../../shared/contexts/CartContext";
 import { useNavigate } from "react-router";
-
 import Header from "../../shared/Header";
 import CartItems from "./components/CartItems";
 import Sidebar from "./components/Sidebar";
@@ -55,15 +54,12 @@ export default function CartPage() {
         }
     }
 
-    console.log(productsInCart);
-    console.log(productsList);
-
     return(
         <Body>
             <Header/>
             <Container>
                 <CartItems productsList={productsList} changeAmount={changeAmount}/>
-                <Sidebar productsList={productsList}/>
+                <Sidebar productsList={productsList} setProductsList={setProductsList}/>
             </Container>
             <FooterSpace/>
         </Body>

@@ -1,19 +1,24 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import OrderContext from "../../../shared/contexts/OrderContext";
 
-export default function Sidebar({productsList}) {
+export default function Sidebar({productsList, setProductsList}) {
     let navigate = useNavigate();
     const [totalPrice, setTotalPrice] = useState(0);
-    console.log(productsList);
+    const { order, setOrder } = useContext(OrderContext);
 
     useEffect(() => {
         let temporaryPrice = 0;
-        productsList.forEach(product => {
-            temporaryPrice += product.amount * (product.price/100);
-        })
+        productsList.forEach(product => {temporaryPrice += product.amount * (product.price/100)})
         setTotalPrice(temporaryPrice);
     }, [productsList])
+
+    function goToPayment() {
+        setOrder(productsList);
+        navigate('/payment');
+        console.log(order);
+    }
 
     return(
         <SidebarStyle>
@@ -28,7 +33,7 @@ export default function Sidebar({productsList}) {
                 </div>
             </TotalPriceInfo>
             <Buttons>
-                <button onClick={() => {productsList.length > 0 ? navigate('/payment') : alert('Adicione algum item ao carrinho antes de prosseguir!')}}>
+                <button onClick={() => {productsList.length > 0 ? goToPayment() : alert('Adicione algum item ao carrinho antes de prosseguir!')}}>
                     <h1>Ir para o pagamento</h1>
                 </button>
                 <button onClick={() => navigate('/')}>
