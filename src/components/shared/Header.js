@@ -1,10 +1,9 @@
 import styled from "styled-components"
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-import CartContext from "./contexts/CartContext";
+import CartContext from './contexts/CartContext'
 import { BiShoppingBag } from 'react-icons/bi';
 import UserContext from "./contexts/UserContext";
-
 export default function Header() {
     const { productsInCart } = useContext(CartContext);
     const { user, setUser } = useContext(UserContext);

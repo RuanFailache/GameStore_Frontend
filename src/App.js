@@ -8,8 +8,8 @@ import SignUpPage from './components/pages/login/SignUpPage';
 import CartPage from "./components/pages/cart/CartPage";
 import { Routes, Route } from "react-router-dom";
 import { useState } from 'react';
-import UserContext from './components/contexts/UserContext';
-import CartContext from './components/contexts/CartContext';
+import UserContext from './components/shared/contexts/UserContext';
+import CartContext from './components/shared/contexts/CartContext';
 import OrderContext from './components/shared/contexts/OrderContext';
 
 export default function App(){

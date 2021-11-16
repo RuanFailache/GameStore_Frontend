@@ -1,6 +1,6 @@
 import { useState } from "react";
-
 import styled from "styled-components";
+import Header from "../../shared/Header";
 import FinishPurchase from "./FinishPurchase";
 import PaymentData from "./PaymentData";
 
@@ -10,17 +10,20 @@ export default function PaymentPage(){
     const [isPaymentDataEmpty, setIsPaymentDataEmpty] = useState(true);
 
     return(
-        <PageContainerStyle>
-            <ContentContainerStyle>
-                <PaymentData 
-                    setIsPaymentDataEmpty={setIsPaymentDataEmpty}
-                />
-                <FinishPurchase 
-                    isPaymentDataEmpty={isPaymentDataEmpty}
-                    setIsPaymentDataEmpty={setIsPaymentDataEmpty}
-                />
-            </ContentContainerStyle>
-        </PageContainerStyle>
+        <>
+            <Header/>
+            <PageContainerStyle>
+                <ContentContainerStyle>
+                    <PaymentData 
+                        setIsPaymentDataEmpty={setIsPaymentDataEmpty}
+                    />
+                    <FinishPurchase 
+                        isPaymentDataEmpty={isPaymentDataEmpty}
+                        setIsPaymentDataEmpty={setIsPaymentDataEmpty}
+                    />
+                </ContentContainerStyle>
+            </PageContainerStyle>
+        </>
     );
 }
 

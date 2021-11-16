@@ -2,9 +2,9 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 import ReactModal from "react-modal";
 import { useNavigate } from "react-router";
-import { cartProds } from "./mockedData";
 import { postPurchase } from "../../../services/api";
-import UserContext from "../../contexts/UserContext";
+import UserContext from "../../shared/contexts/UserContext";
+import OrderContext from "../../shared/contexts/OrderContext";
 
 export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmpty }){
 
@@ -13,6 +13,7 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
     const userId = user.user.userId;
+    const { order } = useContext(OrderContext);
 
     function selectPaymentMethod(event){
         setPaymentMethod(event.target.value);
@@ -44,11 +45,11 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
             });   
     }
 
-    const isCartEmpty = cartProds.length === 0;
+    const isCartEmpty = order.length === 0;
 
     let totalValue = 0;
     if(!isCartEmpty){
-        cartProds.forEach((prod) => {
+        order.forEach((prod) => {
             totalValue += (prod.price*prod.amount);
         });
     }
@@ -56,7 +57,7 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
     const body = {
         userId: userId,
         paymentMethod: paymentMethod,
-        products: cartProds.map((prod) => {
+        products: order.map((prod) => {
             return [{productId: prod.id, amount: prod.amount}]
         }),  
     }
