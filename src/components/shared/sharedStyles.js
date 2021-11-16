@@ -6,6 +6,10 @@ const ContainerStyle = styled.main`
     max-width: 1135px;
     margin: 0 auto;
     position: relative;
+
+    @media (max-width: 600px){
+        width: 100%;
+    }
 `;
 
 export {

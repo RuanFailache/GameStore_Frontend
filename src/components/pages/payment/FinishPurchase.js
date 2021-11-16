@@ -17,6 +17,7 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
     function openConfirmationModal(event){
         event.preventDefault();
         setModalIsOpen(true);
+        console.log(body);
     }
 
     function makePurchase(){
@@ -36,12 +37,11 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
     }
 
     const body = {
-        userId: '',
+        userId: '10',
         method: paymentMethod,
         products: cartProds.map((prod) => {
             return [{productId: prod.id, amount: prod.amount}]
-        }),
-        
+        }),  
     }
 
 
