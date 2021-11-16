@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import ReactModal from "react-modal";
 import { useNavigate } from "react-router";
 import { cartProds } from "./mockedData";
 import { postPurchase } from "../../../services/api";
+import UserContext from "../../contexts/UserContext";
 
 export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmpty }){
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("");
     const navigate = useNavigate();
-    
+    const { user } = useContext(UserContext);
+    const userId = user.user.userId;
+
     function selectPaymentMethod(event){
         setPaymentMethod(event.target.value);
     }
@@ -18,7 +21,6 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
     function openConfirmationModal(event){
         event.preventDefault();
         setModalIsOpen(true);
-        console.log(body);
     }
 
     function makePurchase(){
@@ -52,8 +54,8 @@ export default function FinishPurchase({ isPaymentDataEmpty, setIsPaymentDataEmp
     }
 
     const body = {
-        userId: '10',
-        paymentMmethod: paymentMethod,
+        userId: userId,
+        paymentMethod: paymentMethod,
         products: cartProds.map((prod) => {
             return [{productId: prod.id, amount: prod.amount}]
         }),  
