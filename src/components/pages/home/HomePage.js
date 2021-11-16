@@ -8,12 +8,12 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
-export default function HomePage(){
+export default function HomePage() {
 
     const [games, setGames] = useState([]);
     const [featuredGames, setFeaturedGames] = useState([]);
 
-    function loadProducts(){
+    function loadProducts() {
         getProducts()
             .then((res) => {
                 setGames(res.data);
@@ -31,27 +31,27 @@ export default function HomePage(){
     }, []);
 
     const noGames = games.length === 0;
-    
-    return(
+
+    return (
         <>
-            {noGames ? 
+            {noGames ?
                 <NoGamesStyle>Não há jogos cadastrados :(</NoGamesStyle>
-                :  
-                <>  
+                :
+                <>
                     <BannerCarouselSectionStyle width={45000} autoPlay={true} infiniteLoop={true} interval={5000}>
-                        {featuredGames.map((game) => <Banner key={game.id} featuredGame={game}/>)}
+                        {featuredGames.map((game) => <Banner key={game.id} featuredGame={game} />)}
                     </BannerCarouselSectionStyle>
                     <ContainerStyle>
                         <CatalogTitleStyle>
                             Jogos
                         </CatalogTitleStyle>
                         <GameCardsContainerStyle>
-                            {games.map((game) => 
-                                <GameCard 
-                                    id={game.id} 
-                                    key={`product${game.id}`} 
-                                    name={game.name} 
-                                    price={game.price} 
+                            {games.map((game) =>
+                                <GameCard
+                                    id={game.id}
+                                    key={`product${game.id}`}
+                                    name={game.name}
+                                    price={game.price}
                                     cover={game.cover}
                                     stock={game.stock}
                                 />
