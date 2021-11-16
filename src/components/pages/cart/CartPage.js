@@ -78,6 +78,7 @@ const Container = styled.main`
 
     @media (max-width: 870px) {
         flex-direction: column;
+        margin: 0 auto 0 auto;
         width: calc(100vw - 60px);
     }
 `;

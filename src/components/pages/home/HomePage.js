@@ -77,6 +77,8 @@ const BannerCarouselSectionStyle = styled(Carousel)`
     align-items: center;
     justify-content: center;
 
+    margin: 90px 0 0 0;
+
     @media (max-width: 950px){
         padding-left: 40px;
         height: 30%;
