@@ -67,7 +67,7 @@ export default function HomePage() {
 }
 
 const BannerCarouselSectionStyle = styled(Carousel)`
-    width: 100%;
+    width: calc(100% - 35px);
     height: 560px;
     background-color: #212121;
     padding-left: 35px;

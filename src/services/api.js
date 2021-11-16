@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'https://gamestore-back.herokuapp.com';
+const URL = 'http://localhost:4000';
 
 function getProducts() {
   const promise = axios.get(`${URL}/products`);

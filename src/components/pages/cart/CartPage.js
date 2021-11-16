@@ -53,7 +53,6 @@ export default function CartPage() {
                 <CartItems productsList={productsList} changeAmount={changeAmount}/>
                 <Sidebar productsList={productsList} setProductsList={setProductsList}/>
             </Container>
-            <FooterSpace/>
         </Body>
     )
 }
@@ -81,10 +80,4 @@ const Container = styled.main`
         flex-direction: column;
         width: calc(100vw - 60px);
     }
-`;
-
-const FooterSpace = styled.div`
-    width: 100%;
-    height: 120px;
-    background: #212121;
 `;
