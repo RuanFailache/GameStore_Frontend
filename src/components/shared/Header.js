@@ -3,10 +3,17 @@ import { useContext } from "react";
 import { useNavigate } from "react-router";
 import CartContext from "./contexts/CartContext";
 import { BiShoppingBag } from 'react-icons/bi';
+import UserContext from "./contexts/UserContext";
 
 export default function Header() {
     const { productsInCart } = useContext(CartContext);
+    const { user, setUser } = useContext(UserContext);
     let navigate = useNavigate();
+
+    function logOut() {
+        localStorage.clear();
+        setUser(null);
+    }
 
     return(
         <HeaderDiv>
@@ -14,7 +21,9 @@ export default function Header() {
                 <Logo onClick={() => {navigate('/')}}><h1>Shop</h1><h1>Gamer</h1></Logo>
                 <UserArea>
                     <SignOptions>
-                        <h1>Olá, faça <span onClick={() => {navigate('/signin')}}>login</span> ou <span onClick={() => {navigate('/signup')}}>cadastre</span> uma conta</h1>
+                        {user === null
+                        ? <h1>Olá, faça <span onClick={() => {navigate('/sign-in')}}>login</span> ou <span onClick={() => {navigate('/sign-up')}}>cadastre</span> uma conta</h1>
+                        : <h1>Olá, {user.user.name}! Deseja sair? Clique <span onClick={() => logOut()}>aqui.</span></h1>}
                     </SignOptions>
                     <CartSection onClick={() => {navigate('/cart')}}>
                         <CartIcon/>
@@ -71,10 +80,14 @@ const UserArea = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 350px){
+        width: 150px;
+    }
 `;
 
 const SignOptions = styled.div`
     width: 130px;
+    text-align: center;
     h1 {
         font-family: Play;
         font-weight: bold;
@@ -85,6 +98,9 @@ const SignOptions = styled.div`
     span {
         color: #FF3300;
         cursor: pointer;
+    }
+    @media (max-width: 350px){
+        width: 90px;
     }
 `;
 

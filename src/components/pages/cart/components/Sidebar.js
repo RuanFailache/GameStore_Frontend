@@ -2,11 +2,13 @@ import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import OrderContext from "../../../shared/contexts/OrderContext";
+import UserContext from "../../../shared/contexts/UserContext";
 
-export default function Sidebar({productsList, setProductsList}) {
+export default function Sidebar({productsList}) {
     let navigate = useNavigate();
     const [totalPrice, setTotalPrice] = useState(0);
-    const { order, setOrder } = useContext(OrderContext);
+    const { user } = useContext(UserContext);
+    const { setOrder } = useContext(OrderContext);
 
     useEffect(() => {
         let temporaryPrice = 0;
@@ -15,9 +17,13 @@ export default function Sidebar({productsList, setProductsList}) {
     }, [productsList])
 
     function goToPayment() {
-        setOrder(productsList);
-        navigate('/payment');
-        console.log(order);
+        if(user !== null) {
+            setOrder(productsList);
+            navigate('/payment');
+            console.log(productsList);
+        } else {
+            alert("Entre em sua conta para prosseguir com a compra!")
+        }
     }
 
     return(

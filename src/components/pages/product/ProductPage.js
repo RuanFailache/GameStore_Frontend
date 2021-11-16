@@ -6,9 +6,11 @@ import ProductImages from './ProductImages';
 import { ContainerStyle, FilledButtonStyle, OutlineButtonStyle, PriceStyle, SideBarStyle } from '../../shared/sharedStyles';
 import { ContentStyle, DescriptionStyle, NotFound } from './ProductStyle';
 
-import CartContext from '../../contexts/CartContext';
+import CartContext from '../../shared/contexts/CartContext';
 
 import { getProduct } from '../../../services/api';
+
+import Header from '../../shared/Header';
 
 const ProductPage = () => {
   const { productsInCart, setProductsInCart } = useContext(CartContext)
@@ -59,6 +61,7 @@ const ProductPage = () => {
 
   return (
     <ContainerStyle>
+      <Header />
       {product === null ? <NotFound>Jogo indisponivel ou não encontrado!</NotFound> : (
         <>
           <ContentStyle>

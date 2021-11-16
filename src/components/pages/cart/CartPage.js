@@ -1,15 +1,14 @@
 import styled from "styled-components"
 import { getProduct } from "../../../services/api";
-import UserContext from "../../shared/contexts/UserContext";
 import CartContext from '../../shared/contexts/CartContext';
-import { useNavigate } from "react-router";
 import Header from "../../shared/Header";
+import { useContext, useState, useEffect } from "react";
+import CartItems from './components/CartItems';
+import Sidebar from "./components/Sidebar";
 
 export default function CartPage() {
-    const { user } = useContext(UserContext);
     const { productsInCart } = useContext(CartContext);
     const [productsList, setProductsList] = useState([]);
-    let navigate = useNavigate();
 
     useEffect(() => {
         productsInCart.forEach(gameId => {

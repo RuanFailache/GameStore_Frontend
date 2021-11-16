@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { doSignIn } from '../../../services/api'
 
 import { FilledButtonStyle } from '../../shared/sharedStyles'
 import { FormStyle, InputStyle, AlertStyle } from './loginStyles'
+import UserContext from '../../shared/contexts/UserContext'
 
 const SignInPage = () => {
   const [password, setPassword] = useState("")
@@ -11,6 +12,7 @@ const SignInPage = () => {
   const [messageError, setMessageError] = useState("")
   const [isDisabled, setIsDisabled] = useState(true)
   const navigateTo = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   useEffect(() => {
     if (/\w+@\w+.com/.test(email) && password.length >= 6) {
@@ -28,6 +30,7 @@ const SignInPage = () => {
         token: result.data.token,
         user: { ...result.data.user },
       }));
+      setUser(JSON.parse(localStorage.getItem('user')));
       navigateTo('/')
     } catch (err) {
       const { status } = err.response;
