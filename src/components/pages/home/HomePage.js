@@ -7,6 +7,7 @@ import GameCard from "./GameCard";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import Header from "../../shared/Header";
 
 export default function HomePage() {
 
@@ -38,6 +39,7 @@ export default function HomePage() {
                 <NoGamesStyle>Não há jogos cadastrados :(</NoGamesStyle>
                 :
                 <>
+                    <Header />
                     <BannerCarouselSectionStyle width={45000} autoPlay={true} infiniteLoop={true} interval={5000}>
                         {featuredGames.map((game) => <Banner key={game.id} featuredGame={game} />)}
                     </BannerCarouselSectionStyle>
@@ -65,7 +67,7 @@ export default function HomePage() {
 }
 
 const BannerCarouselSectionStyle = styled(Carousel)`
-    width: 100%;
+    width: 100%
     height: 560px;
     background-color: #212121;
     padding-left: 35px;
