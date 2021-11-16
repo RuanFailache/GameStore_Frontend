@@ -40,10 +40,10 @@ export default function GameCard({ id, name, price, cover, stock }){
                 <GamePriceStyle>
                     {outOfStock ? '---' 
                         : 
-                        <span>
-                            R$ {price/100} 
+                        <p>
+                            <span>R$ {price/100}</span>
                             <AddToCartIconStyle isInTheCart={isInTheCart} onClick={addToCart}/>
-                        </span>
+                        </p>
                     }
                 </GamePriceStyle>
             </CardTextContainerStyle>
@@ -55,7 +55,7 @@ const CardStyle = styled(Link)`
     text-decoration: none;
     
     width: 230px;
-    height: 310px;
+    height: 320px;
     background-color: white;
     border-radius: 5px;
     margin-top: 20px;
@@ -118,10 +118,14 @@ const GameTitleStyle = styled.p`
 const GamePriceStyle = styled.div`
     color: #FF3300;
     font-weight: 700;
+
+    p{
+        display: flex;
+        justify-content: space-between;
+    }
 `;
 
 const AddToCartIconStyle = styled(BsCartPlusFill)`
-    margin-left: 120px;
     color: ${(props) => props.isInTheCart ? '#FF3300' : 'gray'};
     :hover{
         filter: brightness(1.2);

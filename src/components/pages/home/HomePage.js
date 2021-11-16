@@ -99,6 +99,7 @@ const GameCardsContainerStyle = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    width: 100%;
 
     @media (max-width: 600px){
         justify-content: center;
