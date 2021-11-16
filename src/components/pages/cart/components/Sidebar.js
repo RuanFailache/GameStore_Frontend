@@ -65,7 +65,7 @@ const SidebarStyle = styled.div`
     }
 
     @media (max-width: 870px) {
-        width: calc(100% - 60px);
+        width: 100%;
     }
 `;
 
@@ -95,6 +95,14 @@ const TotalPriceInfo = styled.div`
             font-size: 13px;
             line-height: 15px;
             color: #000000;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 870px) {
+        div:first-child {
+            align-items: center;
+            text-align: center;
         }
     }
 `;
@@ -103,6 +111,7 @@ const GrayLine = styled.div`
     width: 100%;
     height: 1px;
     border-bottom: 1px solid rgba(29, 29, 29, 0.1);
+    margin: 5px 0 5px 0;
 `;
 
 const Buttons = styled.div`

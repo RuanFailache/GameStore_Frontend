@@ -60,4 +60,10 @@ const ItemPrice = styled.div`
         color: #FF3300;
         margin: 7px 0 0 0;
     }
+
+    @media (max-width: 870px) {
+        h1 {
+            text-align: center;  
+        }
+    }
 `;
